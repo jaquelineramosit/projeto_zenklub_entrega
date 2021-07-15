@@ -1,0 +1,26 @@
+{
+  "name": "api_ts_teste",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev index.ts"
+  },
+  "keywords": [],
+  "author": "Jaqueline Ramos da Silva",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.3.0",
+    "helmet": "^4.6.0",
+    "joi": "^17.4.1",
+    "moment": "^2.29.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/express-rate-limit": "^5.1.3"
+  }
+}
