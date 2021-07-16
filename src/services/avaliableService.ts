@@ -1,5 +1,14 @@
 import { avaliableRepository } from "../database/repositories";
 
+interface Avaliable {
+	id?: number;
+	professionalid: number;
+	date_avaliable: string;
+	hour_start: string;
+	hour_end: string;
+	isAvaliable: boolean;
+}
+
 interface ParamsDates {
 	dateStart: string;
 	dateEnd: string;
@@ -20,11 +29,11 @@ export class AvaliableService {
 		return avaliableRepository.findAvaliableTimeSlot(paramsDates);
 	}
 
-	async createAvaliable(avaliable) {
+	async createAvaliable(avaliable: Avaliable) {
 		return avaliableRepository.createAvaliable(avaliable);
 	}
 
-	async updateAvaliable(id: number, newAvaliable) {
+	async updateAvaliable(id: number, newAvaliable: Avaliable) {
 		return avaliableRepository.updateAvaliable(id, newAvaliable);
 	}
 

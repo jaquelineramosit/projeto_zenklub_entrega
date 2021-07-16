@@ -2,17 +2,23 @@ import { avaliableService } from "../services";
 import { RestError } from "../utils";
 import { NextFunction, Request, Response } from "express";
 
-async function findAvaliable(req: Request, res: Response, next: NextFunction) {
+async function findAvaliable(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const { id } = req.params;
-		const avaliable = await avaliableService.findAvaliable(id);
+		const avaliable = await avaliableService.findAvaliable(+id);
 		res.json(avaliable);
 	} catch (error) {
 		next(new RestError(404, error));
 	}
 }
 
-async function findAvaliables(req: Request, res: Response, next: NextFunction) {
+async function findAvaliables(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const avaliable = await avaliableService.findAvaliables();
 		res.json(avaliable);
@@ -66,7 +72,7 @@ async function updateAvaliable(
 		const body = req.body;
 		console.log(body);
 		const { id } = req.params;
-		const avaliable = await avaliableService.updateAvaliable(id, body);
+		const avaliable = await avaliableService.updateAvaliable(+id, body);
 		res.json(avaliable);
 	} catch (error) {
 		next(new RestError(404, error));
@@ -80,7 +86,7 @@ async function deleteAvaliable(
 ) {
 	try {
 		const { id } = req.params;
-		await avaliableService.deleteAvaliable(id);
+		await avaliableService.deleteAvaliable(+id);
 		res.status(204).json({});
 	} catch (error) {
 		next(new RestError(500, error));

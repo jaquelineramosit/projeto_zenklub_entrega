@@ -1,17 +1,25 @@
 import { bookSessionService } from "../services";
 import { RestError } from "../utils";
+import { NextFunction, Request, Response } from "express";
 
-async function findBookSession(req, res, next) {
+
+async function findBookSession(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const { id } = req.params;
-		const bookSession = await bookSessionService.findBookSession(id);
+		const bookSession = await bookSessionService.findBookSession(+id);
 		res.json(bookSession);
 	} catch (error) {
 		next(new RestError(404, error));
 	}
 }
 
-async function findBookSessions(req, res, next) {
+async function findBookSessions(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const bookSession = await bookSessionService.findBookSessions();
 		res.json(bookSession);
@@ -20,7 +28,10 @@ async function findBookSessions(req, res, next) {
 	}
 }
 
-async function createBookSession(req, res, next) {
+async function createBookSession(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const body = req.body;
 		const bookSession = await bookSessionService.createBookSession(body);
@@ -30,22 +41,27 @@ async function createBookSession(req, res, next) {
 	}
 }
 
-async function updateBookSession(req, res, next) {
+async function updateBookSession(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
-		const body = req.body;
-		console.log(body);
+		const body = req.body;		
 		const { id } = req.params;
-		const bookSession = await bookSessionService.updateBookSession(id, body);
+		const bookSession = await bookSessionService.updateBookSession(+id, body);
 		res.json(bookSession);
 	} catch (error) {
 		next(new RestError(404, error));
 	}
 }
 
-async function deleteBookSession(req, res, next) {
+async function deleteBookSession(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const { id } = req.params;
-		await bookSessionService.deleteBookSession(id);
+		await bookSessionService.deleteBookSession(+id);
 		res.status(204).json({});
 	} catch (error) {
 		next(new RestError(500, error));

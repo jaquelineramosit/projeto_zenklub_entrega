@@ -1,17 +1,24 @@
 import { professionalService } from "../services/";
 import { RestError } from "../utils";
+import { NextFunction, Request, Response } from "express";
 
-async function getProfessional(req, res, next) {
+async function getProfessional(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const { id } = req.params;
-		const professional = await professionalService.findProfessional(id);
+		const professional = await professionalService.findProfessional(+id);
 		res.json(professional);
 	} catch (error) {
 		next(new RestError(404, error));
 	}
 }
 
-async function getProfessionals(req, res, next) {
+async function getProfessionals(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const professional = await professionalService.findProfessionals();
 		res.json(professional);
@@ -20,7 +27,10 @@ async function getProfessionals(req, res, next) {
 	}
 }
 
-async function createProfessional(req, res, next) {
+async function createProfessional(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const body = req.body;
 		const professional = await professionalService.createProfessional(body);
@@ -30,22 +40,28 @@ async function createProfessional(req, res, next) {
 	}
 }
 
-async function updateProfessional(req, res, next) {
+async function updateProfessional(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const body = req.body;
 		console.log(body);
 		const { id } = req.params;
-		const professional = await professionalService.updateProfessional(id, body);
+		const professional = await professionalService.updateProfessional(+id, body);
 		res.json(professional);
 	} catch (error) {
 		next(new RestError(404, error));
 	}
 }
 
-async function deleteProfessional(req, res, next) {
+async function deleteProfessional(
+	req: Request, 
+	res: Response, 
+	next: NextFunction) {
 	try {
 		const { id } = req.params;
-		await professionalService.deleteProfessional(id);
+		await professionalService.deleteProfessional(+id);
 		res.status(204).json();
 	} catch (error) {
 		next(new RestError(404, error));
