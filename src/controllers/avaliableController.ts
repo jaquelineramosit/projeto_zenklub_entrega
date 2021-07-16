@@ -1,4 +1,4 @@
-import { avaliableService } from "../services";
+import { avaliableService }  from "../services";
 import { RestError } from "../utils";
 import { NextFunction, Request, Response } from "express";
 
